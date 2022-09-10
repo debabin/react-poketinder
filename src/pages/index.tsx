@@ -1,34 +1,33 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
-import { trpc } from '@/utils/trpc';
-import { Button } from '@/components';
-
-import { getPokemonId } from '../utils';
+import { trpc, getPokemonId } from '@/utils';
+import { Button, Ping } from '@/components';
 
 const Home: NextPage = () => {
-  const getPokemonQuery = trpc.useQuery(['pokemons.get-pokemon', { id: 1 }], {
+  const getPokemonQuery = trpc.useQuery(['pokemons.get-random-pokemon'], {
     refetchOnWindowFocus: false,
-    refetchInterval: false
+    refetchInterval: false,
+    refetchOnMount: false
   });
 
-  const ratePokemonQuery = trpc.useMutation(['rating.rate-pokemon']);
-
+  const ratePokemonQuery = trpc.useMutation(['rating.rate-pokemon'], {
+    onSuccess: () => {
+      getPokemonQuery.refetch();
+    }
+  });
+  console.log('getPokemonQuery.isFetched', getPokemonQuery);
   if (!getPokemonQuery.data?.success || !getPokemonQuery.data.data?.name) {
-    return (
-      <section className='flex h-screen flex-col items-center justify-center'>
-        <div className='flex h-[60px] w-[60px] items-center justify-center'>
-          <div className='inline-flex h-full w-full animate-ping rounded-full bg-slate-400 opacity-75' />
-        </div>
-      </section>
-    );
+    return <Ping />;
   }
 
   const pokemon = getPokemonQuery.data.data;
   return (
     <section className='flex h-screen flex-col items-center justify-center'>
       <div className='mb-4'>
-        <h1 className='text-xl font-bold'>Do you like them all ?</h1>
+        <h1 className='text-xl font-bold'>Do you like them all ☄️ ?</h1>
       </div>
       <div className='flex flex-col gap-4 rounded-lg bg-slate-600 p-4'>
         <div className='flex justify-between'>
@@ -36,21 +35,36 @@ const Home: NextPage = () => {
           <span>{getPokemonId(pokemon.id)}</span>
         </div>
 
-        <Image
-          src={pokemon.image}
-          width={300}
-          height={300}
-          layout='fixed'
-          className='animate-fade-in'
-        />
+        <div className='item-center flex justify-center'>
+          <Image
+            src={pokemon.image}
+            width={300}
+            height={300}
+            layout='fixed'
+            className='animate-fade-in'
+          />
+        </div>
 
         <div className='flex gap-3'>
-          <Button onClick={() => ratePokemonQuery.mutate({ id: 1, rate: 'like' })}>LIKE</Button>
-          <Button onClick={() => ratePokemonQuery.mutate({ id: 1, rate: 'dislike' })}>
+          <Button
+            onClick={() => ratePokemonQuery.mutate({ id: pokemon.id, rate: 'like' })}
+            disabled={ratePokemonQuery.isLoading}
+          >
+            LIKE
+          </Button>
+          <Button
+            onClick={() => ratePokemonQuery.mutate({ id: pokemon.id, rate: 'dislike' })}
+            disabled={ratePokemonQuery.isLoading}
+          >
             DISLIKE
           </Button>
         </div>
       </div>
+
+      <div className='mt-10 text-blue-500'>
+        <Link href='/results'>Results</Link> / <Link href='/about'>About</Link>
+      </div>
+      <ReactQueryDevtools />
     </section>
   );
 };

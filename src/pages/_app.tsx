@@ -4,9 +4,8 @@ import { AppRouter } from '@/server/routers';
 
 import '@/styles/globals.css';
 
-const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
-};
+const MyApp: AppType = ({ Component, pageProps }) => <Component {...pageProps} />;
+
 export default withTRPC<AppRouter>({
   config({ ctx }) {
     /**
@@ -27,5 +26,5 @@ export default withTRPC<AppRouter>({
   /**
    * @link https://trpc.io/docs/ssr
    */
-  ssr: true
+  ssr: false
 })(MyApp);
