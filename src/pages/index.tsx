@@ -18,7 +18,7 @@ const Home: NextPage = () => {
       getPokemonQuery.refetch();
     }
   });
-  console.log('getPokemonQuery.isFetched', getPokemonQuery);
+
   if (!getPokemonQuery.data?.success || !getPokemonQuery.data.data?.name) {
     return <Ping />;
   }
@@ -30,20 +30,27 @@ const Home: NextPage = () => {
         <h1 className='text-xl font-bold'>Do you like them all ☄️ ?</h1>
       </div>
       <div className='flex flex-col gap-4 rounded-lg bg-slate-600 p-4'>
-        <div className='flex justify-between'>
-          <h2 className='text-lg font-medium'>{pokemon.name}</h2>
-          <span>{getPokemonId(pokemon.id)}</span>
-        </div>
+        <Link href={`/pokemon/${pokemon.id}`}>
+          <a>
+            <div>
+              <div className='flex justify-between'>
+                <h2 className='text-lg font-medium'>{pokemon.name}</h2>
+                <span>{getPokemonId(pokemon.id)}</span>
+              </div>
 
-        <div className='item-center flex justify-center'>
-          <Image
-            src={pokemon.image}
-            width={300}
-            height={300}
-            layout='fixed'
-            className='animate-fade-in'
-          />
-        </div>
+              <div className='item-center flex justify-center'>
+                <Image
+                  alt={`pokemon ${pokemon.name}`}
+                  src={pokemon.image}
+                  width={300}
+                  height={300}
+                  layout='fixed'
+                  className='animate-fade-in'
+                />
+              </div>
+            </div>
+          </a>
+        </Link>
 
         <div className='flex gap-3'>
           <Button

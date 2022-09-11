@@ -22,6 +22,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
+    'jsx-a11y/anchor-is-valid': 'off',
     'react/prop-types': 'off',
     'import/extensions': 'off',
     'react/react-in-jsx-scope': 'off',

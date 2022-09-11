@@ -8,7 +8,7 @@
     "start": "next start",
     "format": "prettier --write \"**/*.{ts,tsx,css}\"",
     "lint": "eslint **/*.{tsx,ts}",
-    "db": "docker compose up "
+    "db": "docker compose up"
   },
   "dependencies": {
     "@prisma/client": "^4.3.1",
@@ -16,16 +16,19 @@
     "@trpc/next": "^9.27.2",
     "@trpc/react": "^9.27.2",
     "@trpc/server": "^9.27.2",
+    "@upstash/ratelimit": "^0.1.5",
+    "@upstash/redis": "^1.13.1",
     "next": "12.2.5",
     "pokenode-ts": "^1.17.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-query": "3",
+    "react-toastify": "^9.0.8",
     "zod": "^3.18.0"
   },
   "devDependencies": {
-    "@types/node": "18.7.14",
     "@tanstack/react-query-devtools": "^4.2.3",
+    "@types/node": "18.7.14",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.13.0",

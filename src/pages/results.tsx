@@ -22,34 +22,39 @@ const Results = () => {
     const precent = Math.round((pokemon.likes / votes) * 100);
 
     return (
-      <div key={pokemon.id} className='flex flex-col gap-4 rounded-lg bg-slate-600 p-3'>
-        <div className='flex justify-between'>
-          <h2 className='text-lg font-medium'>{pokemon.name}</h2>
-          <span>{getPokemonId(pokemon.id)}</span>
-        </div>
+      <Link key={pokemon.id} href={`/pokemon/${pokemon.id}`}>
+        <a>
+          <div className='flex flex-col gap-4 rounded-lg bg-slate-600 p-3'>
+            <div className='flex justify-between'>
+              <h2 className='text-lg font-medium'>{pokemon.name}</h2>
+              <span>{getPokemonId(pokemon.id)}</span>
+            </div>
 
-        <div className='item-center flex justify-center'>
-          <Image
-            src={pokemon.image}
-            width={140}
-            height={140}
-            layout='fixed'
-            className='animate-fade-in'
-          />
-        </div>
+            <div className='item-center flex justify-center'>
+              <Image
+                alt={`pokemon ${pokemon.name}`}
+                src={pokemon.image}
+                width={140}
+                height={140}
+                layout='fixed'
+                className='animate-fade-in'
+              />
+            </div>
 
-        <div>
-          <div>
-            likes: <span className='text-lg font-bold'>{pokemon.likes}</span>
+            <div>
+              <div>
+                likes: <span className='text-lg font-bold'>{pokemon.likes}</span>
+              </div>
+              <div>
+                dislikes: <span className='text-lg font-bold'>{pokemon.dislikes}</span>
+              </div>
+              <div>
+                precent: <span className='text-lg font-bold'>{precent}%</span>
+              </div>
+            </div>
           </div>
-          <div>
-            dislikes: <span className='text-lg font-bold'>{pokemon.dislikes}</span>
-          </div>
-          <div>
-            precent: <span className='text-lg font-bold'>{precent}%</span>
-          </div>
-        </div>
-      </div>
+        </a>
+      </Link>
     );
   });
 
@@ -58,7 +63,9 @@ const Results = () => {
       <div className='my-4'>
         <h1 className='text-xl font-bold'>Results ❤️</h1>
       </div>
-      <Link href='/'>Home</Link>
+      <div className='my-2 text-blue-500'>
+        <Link href='/'>Home</Link>
+      </div>
       <div className='gird-cols-1 grid w-full gap-3 px-5 sm:w-[800px] sm:grid-cols-3'>
         {pokemons}
       </div>

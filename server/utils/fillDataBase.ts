@@ -9,10 +9,10 @@ export const fillDataBase = async () => {
 
   const pokemonsWithImages = pokemons.results.map((pokemon, index) => ({
     id: index + 1,
-    name: pokemon.name,
     image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
       index + 1
-    }.png`
+    }.png`,
+    ...pokemon
   }));
 
   const pokemonsCount = await prisma.pokemons.count();
