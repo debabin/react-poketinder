@@ -7,13 +7,13 @@ const About = () => (
       <h1 className='text-xl font-bold'>Join to community 😎</h1>
       <ul className='text-xl text-blue-400'>
         <li>
-          <Link href='https://github.com/TheoBr/roundest-mon'>Github Repository</Link>
+          <Link href='https://github.com/debabin/react-poketinder'>Github Repository</Link>
         </li>
         <li>
           <Link href='https://www.youtube.com/c/SIBERIACANCODE'>Youtube</Link>
         </li>
         <li>
-          <Link href='https://github.com/debabin/react-poketinder'>Discord</Link>
+          <Link href='https://discord.gg/ceWVt2znzA'>Discord</Link>
         </li>
         <li>
           <Link href='https://t.me/siberiacancode'>Telegram</Link>
