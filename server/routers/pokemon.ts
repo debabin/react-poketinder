@@ -9,7 +9,7 @@ export const pokemonsRouter = trpc
     resolve: async () => {
       const randomId = Math.round(Math.random() * MAX_POKEMON_COUNTS);
       const pokemon = await prisma.pokemons.findFirst({ where: { id: randomId || 1 } });
-
+      console.log('@');
       return wrapSuccess(pokemon);
     }
   })

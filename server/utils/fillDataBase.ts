@@ -7,7 +7,7 @@ export const fillDataBase = async () => {
 
   const pokemons = await pokeApi.listPokemons(0, 800);
 
-  const pokemonsWithImages = pokemons.results.map((pokemon, index) => ({
+  const pokemonsWithImages = pokemons.results.map(({ url, ...pokemon }, index) => ({
     id: index + 1,
     image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
       index + 1
